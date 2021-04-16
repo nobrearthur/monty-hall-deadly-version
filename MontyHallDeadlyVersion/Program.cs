@@ -32,8 +32,8 @@ namespace MontyHallDeadlyVersion
         static int proposal;
         public static void Main(string[] args)
         {
-            int choice, chosen;
-            string answer;
+            int choice, chosen, new_door, mask;
+            char answer;
 
             string[] doors = { "mask", "empty", "empty", "empty", "empty", "empty", "empty", "empty", "empty", "empty" };
             Shuffle(doors);
@@ -51,7 +51,9 @@ namespace MontyHallDeadlyVersion
                 do
                 {
                     proposal = rnd.Next(10);
-                } while (proposal == chosen);
+                } 
+                while (proposal == chosen);
+                mask = chosen;
 
             }
             else
@@ -65,6 +67,7 @@ namespace MontyHallDeadlyVersion
                         proposal = i;
                     }
                 }
+                mask = proposal;
             }
 
             // Revelar as 8 portas vazias
@@ -86,15 +89,36 @@ namespace MontyHallDeadlyVersion
                 }
             }
 
+            Slow_Text($"\n Deseja trocar a sua escolha (Porta {chosen + 1}) pela Porta {proposal + 1}? [s / n]\n");
+            answer = char.Parse(Console.ReadLine());
+
+            if (answer == 's')
+            {
+                new_door = proposal;
+            } 
+            else
+            {
+                new_door = chosen;
+            }
 
             Slow_Text("\nAbrindo todas as portas...\n");
 
             foreach (string open in doors)
             {
-                Console.WriteLine(open);
+                Slow_Text($"\n {open}");
                 Thread.Sleep(300);
             }
 
+            if (new_door == mask)
+            {
+                Slow_Text("\nParabéns! Você encontrou a máscara!" +
+                    " Coloque-a imediatamente, e logo poderá deixar a sala com vida!");
+            }
+            else
+            {
+                Slow_Text("\nInfelizmente você não encontrou a máscara. Em instantes perderá a consciência... Adeus!");
+            }
+            Console.ReadKey();
         }
     }
 }
