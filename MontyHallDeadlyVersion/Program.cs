@@ -26,7 +26,7 @@ namespace MontyHallDeadlyVersion
             foreach (char word in text)
             {
                 Console.Write(word);
-                Thread.Sleep(40);
+                Thread.Sleep(10);
             }
         }
         static int proposal;
