@@ -29,23 +29,47 @@ namespace MontyHallDeadlyVersion
                 Thread.Sleep(10);
             }
         }
+
+        static void PrintDoors(string[] array)
+        {
+            // Mostra as portas organizadas
+            for (var i = 0; i < array.Length; i++)
+            {
+                if (i == array.Length / 2)
+                {
+                    Console.WriteLine("\n\n");
+                }
+
+                Slow_Text($"|\t{array[i],-10}|");
+            }
+        }
+
         static int proposal;
         public static void Main(string[] args)
         {
             int choice, chosen, new_door, mask;
             char answer;
 
-            string[] doors = { "mask", "empty", "empty", "empty", "empty", "empty", "empty", "empty", "empty", "empty" };
+            string[] doors = { "MÁSCARA", " ", " ", " ", " ", " ", " ", " ", " ", " " };
             Shuffle(doors);
 
-            Slow_Text("Escolha uma porta digitando o número correspondente:\n");
-            choice = int.Parse(Console.ReadLine());
+            string[] visual_doors = { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10" };
+            PrintDoors(visual_doors);
+
+            do
+            {
+                Slow_Text("\n\nEscolha uma porta digitando o número correspondente:\n");
+                choice = int.Parse(Console.ReadLine());
+            } while (choice < 1 | choice > 10);
+            
             Slow_Text($"\nVocê escolheu a porta {choice}");
+            Slow_Text("\n Aperte qualquer tecla para continuar...");
+            Console.ReadKey();
 
             chosen = choice - 1;
 
 
-            if (doors[chosen] == "mask")
+            if (doors[chosen] == "MÁSCARA")
             {
                 // Procurar por alguma vazia aleatória para sugerir a troca
                 do
@@ -62,7 +86,7 @@ namespace MontyHallDeadlyVersion
 
                 for (var i = 0; i < doors.Length; i++)
                 {
-                    if (doors[i] == "mask")
+                    if (doors[i] == "MÁSCARA")
                     {
                         proposal = i;
                     }
@@ -72,7 +96,7 @@ namespace MontyHallDeadlyVersion
 
             // Revelar as 8 portas vazias
 
-            Console.WriteLine();
+            /*Console.WriteLine();
             for (var i = 0; i < doors.Length; i++)
             {
                 if (i == chosen)
@@ -87,10 +111,28 @@ namespace MontyHallDeadlyVersion
                 {
                     Slow_Text($"VAZIA\n");
                 }
+            }*/
+
+            Console.WriteLine();
+            for (var i = 0; i < doors.Length; i++)
+            {
+                if (i != chosen & i != proposal)
+                {
+                    visual_doors[i] = " ";
+                }
             }
+
+            Console.Clear();
+            PrintDoors(visual_doors);
 
             Slow_Text($"\n Deseja trocar a sua escolha (Porta {chosen + 1}) pela Porta {proposal + 1}? [s / n]\n");
             answer = char.Parse(Console.ReadLine());
+
+            while (answer != 's' & answer != 'n')
+            {
+                Slow_Text("\n Comando inválido! Tecle 's' para SIM ou 'n' para NÃO.\n");
+                answer = char.Parse(Console.ReadLine());
+            }
 
             if (answer == 's')
             {
@@ -101,13 +143,20 @@ namespace MontyHallDeadlyVersion
                 new_door = chosen;
             }
 
+
+            Console.Clear();
             Slow_Text("\nAbrindo todas as portas...\n");
 
+            visual_doors[new_door] = doors[new_door];
+
+            PrintDoors(visual_doors);
+
+            /*
             foreach (string open in doors)
             {
                 Slow_Text($"\n {open}");
                 Thread.Sleep(300);
-            }
+            }*/
 
             if (new_door == mask)
             {
