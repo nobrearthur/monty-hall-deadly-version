@@ -26,7 +26,7 @@ namespace MontyHallDeadlyVersion
             foreach (char word in text)
             {
                 Console.Write(word);
-                Thread.Sleep(40); // EDITAR DEPOIS!!!!
+                Thread.Sleep(40);
             }
         }
 
@@ -44,28 +44,14 @@ namespace MontyHallDeadlyVersion
             }
         }
 
-        static int proposal;
-        public static void Main(string[] args)
+        static void Intro()
         {
-            int choice, chosen, new_door, mask;
-            char answer;
-
-            string[] doors = { "MÁSCARA", " ", " ", " ", " ", " ", " ", " ", " ", " " };
-            Shuffle(doors);
-
-            string[] visual_doors = { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10" };
-            
-            // Adicionar meio de pular a introdução//
-
-            PrintText("Você acorda um pouco tonto e percebe que está em um quarto iluminado, porém sem janelas.\n");
+            PrintText(" Você acorda um pouco tonto e percebe que está em um quarto iluminado, porém sem janelas.\n");
             Thread.Sleep(1000);
-            PrintText("\nAlém da porta, que aparentemente leva à saída, vê apenas alguns armários enfileirados, numerados de 1 a 10.\n\n\n");
+            PrintText("\n Além da porta, que aparentemente leva à saída, vê apenas alguns armários enfileirados, numerados de 1 a 10.\n\n\n");
             Thread.Sleep(500);
-
-            PrintDoors(visual_doors);
-            
             Thread.Sleep(2000);
-            PrintText("\n\n\n Você até tenta abrir a porta, mas ela está trancada! \n");
+            PrintText("\n Você até tenta abrir a porta, mas ela está trancada! \n");
             Thread.Sleep(1000);
             PrintText("\n Depois, verifica os armários, em busca de uma chave, cartão ou qualquer coisa.\n");
             Thread.Sleep(500);
@@ -83,30 +69,41 @@ namespace MontyHallDeadlyVersion
             Thread.Sleep(2000);
             PrintText("\n 'OLÁ! OLÁ! OLÁ!'\n");
             Thread.Sleep(2000);
-            PrintText("\n Você ouve uma voz sair de lá. \n");
+            PrintText("\n Uma voz! \n");
             Thread.Sleep(2000);
             PrintText("\n 'Você já deve ter percebido que não está em uma boa situação, certo?'\n");
             Thread.Sleep(2000);
-            PrintText("\n 'A sala está sendo preenchida por um gás mortal, e logo logo você morrerá se continuar aí.'\n");
+            PrintText("\n 'Esta sala está sendo invadida por um gás mortal, e logo logo você morrerá se continuar aí.'\n");
             Thread.Sleep(2000);
             PrintText("\n 'No entanto, tenho uma boa notícia. Dentro de um desses armários há uma máscara! " +
                 "Se encontrá-la, terá a chance de sobreviver e sair da sala.'\n");
             Thread.Sleep(2000);
-            PrintText("\n 'Ah... E antes que eu me esqueça, você pode escolher APENAS uma!'\n");
+            PrintText("\n 'Ah... E antes que eu me esqueça, você pode escolher APENAS uma porta!'\n");
             Thread.Sleep(3000);
-            PrintText("\n 'Escolha rápido! Não vai durar muito se continuar enrolando.'\n");
+            PrintText("\n 'Escolha rápido! Não vai durar muito se continuar enrolando!'\n");
             Thread.Sleep(2000);
             Console.Clear();
 
+        }
+
+        static void Game()
+        {
+            int choice, chosen, new_door, mask;
+            char answer;
+
+            string[] doors = { "MÁSCARA", " ", " ", " ", " ", " ", " ", " ", " ", " " };
+            Shuffle(doors);
+
+            string[] visual_doors = { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10" };
             PrintDoors(visual_doors);
 
             do
             {
                 PrintText("\n\nEscolha uma porta digitando o número correspondente:\n");
                 choice = int.Parse(Console.ReadLine());
-            } 
+            }
             while (choice < 1 | choice > 10);
-            
+
             PrintText($"\nVocê escolheu a porta {choice}");
             PrintText("\n\nAperte qualquer tecla para continuar...");
             Console.ReadKey();
@@ -121,7 +118,7 @@ namespace MontyHallDeadlyVersion
                 do
                 {
                     proposal = rnd.Next(10);
-                } 
+                }
                 while (proposal == chosen);
                 mask = chosen;
 
@@ -140,12 +137,13 @@ namespace MontyHallDeadlyVersion
                 mask = proposal;
             }
 
-            PrintText("\n'Muito bem! Olha...  Não seria muito justo deixar você escolher 1 em 10 portas...'\n");
+            PrintText("\n'Muito bem! Olha...  Não me parece tão justo deixar você escolher 1 entre 10 portas... '\n");
             Thread.Sleep(2000);
             PrintText("\n'10% de chances de acertar... Por isso te darei uma nova chance!'\n");
             Thread.Sleep(2000);
-            PrintText("\n'Um comando abrirá 8 portas vazias.'\n");
+            PrintText("\nPressione qualquer tecla para abrir 8 portas!\n");
             Thread.Sleep(2000);
+            Console.ReadKey();
             PrintText("\n BIPE!!!\n");
             Thread.Sleep(2000);
 
@@ -162,17 +160,17 @@ namespace MontyHallDeadlyVersion
             Console.Clear();
             PrintDoors(visual_doors);
 
-            PrintText("\n 'LEGAL, NÉ???'\n");
+            PrintText("\n\n'LEGAL, NÉ???'\n");
             Thread.Sleep(2000);
-            PrintText($"\n 'Como já deve ter observado, a máscara está na porta {chosen+1} ou na porta {proposal+1}, certo?'\n");
+            PrintText($"\n 'Como já deve ter observado, a máscara está na porta {chosen + 1} ou na porta {proposal + 1}, certo?'\n");
             Thread.Sleep(2000);
             PrintText("\n 'Pois bem, só me responda uma coisa agora, e rápido!'\n");
             Thread.Sleep(2000);
-            PrintText($"\n 'Deseja trocar a sua escolha (Porta {chosen+1}) pela Porta {proposal+1}?'\n");
+            PrintText($"\n 'Deseja trocar a sua escolha (Porta {chosen + 1}) pela Porta {proposal + 1}?'\n");
             Thread.Sleep(500);
             PrintText("\n [s - SIM | n - NÃO] \n");
             answer = char.Parse(Console.ReadLine());
-            Thread.Sleep(2000);    
+            Thread.Sleep(2000);
 
             while (answer != 's' & answer != 'n')
             {
@@ -183,7 +181,7 @@ namespace MontyHallDeadlyVersion
             if (answer == 's')
             {
                 new_door = proposal;
-            } 
+            }
             else
             {
                 new_door = chosen;
@@ -193,37 +191,57 @@ namespace MontyHallDeadlyVersion
             Console.Clear();
             PrintText("\nEstá feito!\n");
             Thread.Sleep(1000);
-            /*PrintText("\nEstá feito!\n");
-            Thread.Sleep(1000);
-            PrintText("\nEstá feito!\n");
-            Thread.Sleep(1000);
-            PrintText("\nEstá feito!\n");
-            Thread.Sleep(1000);*/
 
-            PrintText("\nAbrindo todas as portas...\n");
+            PrintText("\nAgora vamos abrir a porta que você escolheu!\n");
+            Thread.Sleep(1000);
 
             visual_doors[new_door] = doors[new_door];
 
             PrintDoors(visual_doors);
 
-            /*
-            foreach (string open in doors)
-            {
-                Slow_Text($"\n {open}");
-                Thread.Sleep(300);
-            }*/
-
             if (new_door == mask)
             {
-                PrintText("\n 'PARABÉNS! Você encontrou a máscara!" +
+                PrintText("\n\n 'PARABÉNS! Você encontrou a máscara!" +
                     " Coloque-a imediatamente, e logo poderá deixar a sala com vida!'");
             }
             else
             {
-                PrintText("\n 'OPS! Parece que a sorte não está ao seu lado hoje..." +
-                    " Você perderá a consciência em alguns instantes. Não será tão doloroso... ADEUS!'");
+                PrintText("\n\n 'OPS! Parece que a sorte não está ao seu lado hoje...'");
+                Thread.Sleep(200);
+                PrintText("\n\n 'Você perderá a consciência em alguns instantes. Não será tão doloroso...'");
+                Thread.Sleep(200);
+                PrintText("\n\n 'ADEUS!'");
             }
             Console.ReadKey();
+        }
+
+        static int proposal;
+        public static void Main(string[] args)
+        {
+          
+            char skip;
+
+            PrintText("Monty Hall - Deadly Version\n\n");
+            Thread.Sleep(3000);
+
+            Console.WriteLine("Aperte a tecla correspondente: ");
+            Console.WriteLine("[C]omeçar");
+            Console.WriteLine("[P]ular introdução");
+            skip = char.Parse(Console.ReadLine());
+            Thread.Sleep(200);
+            Console.Clear();
+
+
+            if (skip == 'c' | skip == 'C')
+            {
+                Intro();
+                Game();
+            } 
+            else 
+          if (skip == 'p' | skip == 'P')
+            {
+                Game();
+            }
         }
     }
 }
