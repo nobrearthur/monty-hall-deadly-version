@@ -20,13 +20,13 @@ namespace MontyHallDeadlyVersion
             }
         }
 
-        static void Slow_Text(string text)
+        static void PrintText(string text)
         {
             // Método responsável por imprimir as letras com delay de 40ms
             foreach (char word in text)
             {
                 Console.Write(word);
-                Thread.Sleep(10);
+                Thread.Sleep(0); // EDITAR DEPOIS!!!!
             }
         }
 
@@ -40,7 +40,7 @@ namespace MontyHallDeadlyVersion
                     Console.WriteLine("\n\n");
                 }
 
-                Slow_Text($"|\t{array[i],-10}|");
+                PrintText($"|\t{array[i],-10}|");
             }
         }
 
@@ -58,12 +58,13 @@ namespace MontyHallDeadlyVersion
 
             do
             {
-                Slow_Text("\n\nEscolha uma porta digitando o número correspondente:\n");
+                PrintText("\n\nEscolha uma porta digitando o número correspondente:\n");
                 choice = int.Parse(Console.ReadLine());
-            } while (choice < 1 | choice > 10);
+            } 
+            while (choice < 1 | choice > 10);
             
-            Slow_Text($"\nVocê escolheu a porta {choice}");
-            Slow_Text("\n Aperte qualquer tecla para continuar...");
+            PrintText($"\nVocê escolheu a porta {choice}");
+            PrintText("\n Aperte qualquer tecla para continuar...");
             Console.ReadKey();
 
             chosen = choice - 1;
@@ -96,23 +97,6 @@ namespace MontyHallDeadlyVersion
 
             // Revelar as 8 portas vazias
 
-            /*Console.WriteLine();
-            for (var i = 0; i < doors.Length; i++)
-            {
-                if (i == chosen)
-                {
-                    Slow_Text($"{chosen + 1}\n");
-                }
-                else if (i == proposal)
-                {
-                    Slow_Text($"{proposal + 1}\n");
-                }
-                else
-                {
-                    Slow_Text($"VAZIA\n");
-                }
-            }*/
-
             Console.WriteLine();
             for (var i = 0; i < doors.Length; i++)
             {
@@ -125,12 +109,12 @@ namespace MontyHallDeadlyVersion
             Console.Clear();
             PrintDoors(visual_doors);
 
-            Slow_Text($"\n Deseja trocar a sua escolha (Porta {chosen + 1}) pela Porta {proposal + 1}? [s / n]\n");
+            PrintText($"\n Deseja trocar a sua escolha (Porta {chosen + 1}) pela Porta {proposal + 1}? [s / n]\n");
             answer = char.Parse(Console.ReadLine());
 
             while (answer != 's' & answer != 'n')
             {
-                Slow_Text("\n Comando inválido! Tecle 's' para SIM ou 'n' para NÃO.\n");
+                PrintText("\n Comando inválido! Tecle 's' para SIM ou 'n' para NÃO.\n");
                 answer = char.Parse(Console.ReadLine());
             }
 
@@ -145,7 +129,7 @@ namespace MontyHallDeadlyVersion
 
 
             Console.Clear();
-            Slow_Text("\nAbrindo todas as portas...\n");
+            PrintText("\nAbrindo todas as portas...\n");
 
             visual_doors[new_door] = doors[new_door];
 
@@ -160,12 +144,12 @@ namespace MontyHallDeadlyVersion
 
             if (new_door == mask)
             {
-                Slow_Text("\nParabéns! Você encontrou a máscara!" +
+                PrintText("\nParabéns! Você encontrou a máscara!" +
                     " Coloque-a imediatamente, e logo poderá deixar a sala com vida!");
             }
             else
             {
-                Slow_Text("\nInfelizmente você não encontrou a máscara. Em instantes perderá a consciência... Adeus!");
+                PrintText("\nInfelizmente você não encontrou a máscara. Em instantes perderá a consciência... Adeus!");
             }
             Console.ReadKey();
         }
