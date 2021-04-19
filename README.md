@@ -15,4 +15,4 @@ No entanto, o programa foi baseado em um dos puzzles do jogo "*[Zero Escape: Tim
  
 Será que uma simples escolha será capaz de te salvar?
 ###
-*Obs.: o programa poderá passar por mudanças e aprimoramentos futuros, principalmente relacionados ao cálculo de probabilidades.*
+*Obs.: o programa poderá passar por mudanças e aprimoramentos futuros, principalmente relacionados ao cálculo de probabilidades, ainda não implementado.*
