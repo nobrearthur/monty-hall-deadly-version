@@ -138,7 +138,7 @@ namespace MontyHallDeadlyVersion
                 mask = proposal;
             }
 
-            PrintText("\n'Muito bem! Olha... Não me parece tão justo deixar você escolher apenas 1 entre 10 portas... '\n");
+            PrintText("\n'Muito bem! Olha...  Não me parece tão justo deixar você escolher apenas 1 entre 10 portas... '\n");
             Thread.Sleep(2000);
             PrintText("\n'10% de chances de acertar... Por isso te darei uma nova chance!'\n");
             Thread.Sleep(2000);
